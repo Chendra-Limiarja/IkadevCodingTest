@@ -1,0 +1,207 @@
+[gd_scene load_steps=19 format=3 uid="uid://dumbhfu4scwa0"]
+
+[ext_resource type="Script" uid="uid://dmx56c1xit3a4" path="res://scenes/delivery_game.gd" id="1_0yy4h"]
+[ext_resource type="Texture2D" uid="uid://b3b03uxi4na4f" path="res://assets/sprites/bg_castle.png" id="1_a2r0g"]
+[ext_resource type="Texture2D" uid="uid://de4q8kamuhi6j" path="res://assets/sprites/dirtCenter.png" id="2_oyo73"]
+[ext_resource type="Texture2D" uid="uid://cjj443yafgri4" path="res://assets/sprites/packages/truck_hill.png" id="2_ye3kp"]
+[ext_resource type="Texture2D" uid="uid://dve50357fvjkw" path="res://assets/sprites/packages/boxPile.png" id="4_0l366"]
+[ext_resource type="Script" uid="uid://cwy1g1t2idgya" path="res://scenes/pickup_area.gd" id="4_tcv1e"]
+[ext_resource type="PackedScene" uid="uid://03vk72gilt8e" path="res://scenes/player.tscn" id="5_0l366"]
+[ext_resource type="PackedScene" uid="uid://bwa5h8sx3w66e" path="res://scenes/recipient.tscn" id="7_jo320"]
+[ext_resource type="Script" uid="uid://cfrra3848h113" path="res://scenes/game_over_menu.gd" id="7_tip0w"]
+[ext_resource type="Texture2D" uid="uid://f11sqfm8085w" path="res://assets/sprites/recipient/recipient a.png" id="8_kknyk"]
+[ext_resource type="Texture2D" uid="uid://dslnxtf4n5gpd" path="res://assets/sprites/recipient/recipient b.png" id="9_cx6qd"]
+[ext_resource type="Texture2D" uid="uid://ceuihcruysoaw" path="res://assets/sprites/recipient/recipient c.png" id="10_0yy4h"]
+[ext_resource type="Texture2D" uid="uid://dw5k35kjih22s" path="res://assets/sprites/recipient/recipient d.png" id="11_tip0w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aihv6"]
+size = Vector2(173, 266)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0l366"]
+size = Vector2(70.7494, 71.5315)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngsha"]
+size = Vector2(7.25596, 512.275)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ye3kp"]
+size = Vector2(111, 815.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcv1e"]
+size = Vector2(277.5, 282)
+
+[node name="DeliveryGame" type="Node2D"]
+script = ExtResource("1_0yy4h")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(644, 404)
+scale = Vector2(1.25781, 1.57031)
+texture = ExtResource("1_a2r0g")
+
+[node name="TruckSlope" type="Sprite2D" parent="Background"]
+position = Vector2(-478.609, 151.562)
+scale = Vector2(0.908607, 0.946126)
+texture = ExtResource("2_ye3kp")
+
+[node name="Borders" type="Node2D" parent="."]
+position = Vector2(644, 404)
+scale = Vector2(1.25781, 1.57031)
+
+[node name="BoxPile" type="StaticBody2D" parent="Borders"]
+position = Vector2(-512, -257.274)
+scale = Vector2(0.795031, 0.636816)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BoxPile"]
+position = Vector2(172.5, 562)
+shape = SubResource("RectangleShape2D_aihv6")
+
+[node name="Ground" type="StaticBody2D" parent="Borders"]
+position = Vector2(1.1926, 221.294)
+scale = Vector2(14.7762, 1.00981)
+
+[node name="GroundSprite" type="Sprite2D" parent="Borders/Ground"]
+texture = ExtResource("2_oyo73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Ground"]
+position = Vector2(-0.0518799, 0.765778)
+shape = SubResource("RectangleShape2D_0l366")
+
+[node name="BorderLeft" type="StaticBody2D" parent="Borders"]
+position = Vector2(1.1926, 221.294)
+scale = Vector2(14.7762, 1.00981)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BorderLeft"]
+position = Vector2(-38.0669, -219.876)
+shape = SubResource("RectangleShape2D_ngsha")
+
+[node name="BorderRight" type="StaticBody2D" parent="Borders"]
+position = Vector2(-512, -257.274)
+scale = Vector2(0.795031, 0.636816)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BorderRight"]
+position = Vector2(1342, 401.75)
+shape = SubResource("RectangleShape2D_ye3kp")
+
+[node name="PickupArea" type="Area2D" parent="."]
+script = ExtResource("4_tcv1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="PickupArea"]
+position = Vector2(177, 565)
+scale = Vector2(0.813208, 1)
+texture = ExtResource("4_0l366")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(221.25, 559)
+shape = SubResource("RectangleShape2D_tcv1e")
+
+[node name="Recipients" type="Node2D" parent="."]
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TimerLabel" type="Label" parent="UI"]
+offset_left = 482.0
+offset_top = 22.0
+offset_right = 791.0
+offset_bottom = 91.0
+theme_override_font_sizes/font_size = 50
+text = "Time Left: 60"
+
+[node name="HighScoreLabel" type="Label" parent="UI"]
+offset_left = 42.0
+offset_top = 32.0
+offset_right = 205.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 30
+text = "High Score:"
+
+[node name="GameOverMenu" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_tip0w")
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOverMenu"]
+layout_mode = 0
+offset_left = 391.0
+offset_top = 161.0
+offset_right = 900.0
+offset_bottom = 607.0
+color = Color(0, 0, 0, 0.603922)
+
+[node name="GameOverText" type="Label" parent="UI/GameOverMenu"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 203.0
+offset_right = 856.0
+offset_bottom = 258.0
+theme_override_font_sizes/font_size = 40
+text = "Your Final Score Is:"
+horizontal_alignment = 1
+
+[node name="FinalScore" type="Label" parent="UI/GameOverMenu"]
+offset_left = 485.0
+offset_top = 309.0
+offset_right = 789.0
+offset_bottom = 364.0
+theme_override_font_sizes/font_size = 40
+text = "10"
+horizontal_alignment = 1
+
+[node name="NewHighScore" type="Label" parent="UI/GameOverMenu"]
+visible = false
+offset_left = 482.0
+offset_top = 387.0
+offset_right = 805.0
+offset_bottom = 442.0
+theme_override_font_sizes/font_size = 40
+text = "New High Score!"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="UI/GameOverMenu"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 486.0
+offset_right = 876.0
+offset_bottom = 549.0
+theme_override_font_sizes/font_size = 40
+text = "Main Menu
+"
+
+[node name="RetryButton" type="Button" parent="UI/GameOverMenu"]
+offset_left = 421.0
+offset_top = 485.0
+offset_right = 600.0
+offset_bottom = 548.0
+theme_override_font_sizes/font_size = 40
+text = "Retry"
+
+[node name="Player" parent="." instance=ExtResource("5_0l366")]
+position = Vector2(310, 650)
+
+[node name="Recipient" parent="." groups=["recipients"] instance=ExtResource("7_jo320")]
+position = Vector2(547, 664)
+character_sprite = ExtResource("8_kknyk")
+
+[node name="Recipient2" parent="." groups=["recipients"] instance=ExtResource("7_jo320")]
+position = Vector2(770, 620)
+character_sprite = ExtResource("9_cx6qd")
+
+[node name="Recipient3" parent="." groups=["recipients"] instance=ExtResource("7_jo320")]
+position = Vector2(978, 673)
+character_sprite = ExtResource("10_0yy4h")
+
+[node name="Recipient4" parent="." groups=["recipients"] instance=ExtResource("7_jo320")]
+position = Vector2(1189, 666)
+character_sprite = ExtResource("11_tip0w")
+
+[connection signal="body_entered" from="PickupArea" to="PickupArea" method="_on_body_entered"]
+[connection signal="body_exited" from="PickupArea" to="PickupArea" method="_on_body_exited"]
+[connection signal="pressed" from="UI/GameOverMenu/MainMenuButton" to="UI/GameOverMenu" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/RetryButton" to="UI/GameOverMenu" method="_on_retry_button_pressed"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://03vk72gilt8e"]
+
+[ext_resource type="Texture2D" uid="uid://yjmjbcobf2n0" path="res://assets/sprites/p1_walk/PNG/p1_walk02.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dtxhtxmnyx3rx" path="res://scenes/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://dkfmhnwcjadx7" path="res://assets/sprites/packages/box.png" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bdy363oqkbelp" path="res://assets/audio/pickup.ogg" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://x41ex5ho2iwl" path="res://assets/audio/delivery.ogg" id="5_fjrip"]
+[ext_resource type="AudioStream" uid="uid://c0vagsjiex1qv" path="res://assets/audio/error.ogg" id="6_smehm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 34.0
+height = 98.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g2els")
+speed = 500
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -3)
+shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="PackageSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4, -73)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_qhqgy")
+
+[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tuyoq")
+
+[node name="DeliverySFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fjrip")
+
+[node name="ErrorSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_smehm")

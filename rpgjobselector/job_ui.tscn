@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkcrq1r05w6iy"]
+
+[ext_resource type="Script" uid="uid://besf3yyqqv7tq" path="res://job_ui.gd" id="1_la4hn"]
+
+[node name="JobUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_la4hn")
+
+[node name="SelectButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 180.0
+offset_right = 630.0
+offset_bottom = 200.0
+
+[node name="JobName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 285.0
+offset_right = 420.0
+offset_bottom = 308.0
+
+[node name="JobDesc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 310.0
+offset_right = 420.0
+offset_bottom = 333.0
+
+[node name="SkillList" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 340.0
+offset_right = 420.0
+offset_bottom = 380.0
